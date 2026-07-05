@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🎁 プレゼントキット — AIエージェントでLINE運用を自動化する教科書（ClaudeCodeチャンネル）</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:#D9774F; --brand-deep:#C15640; --brand-soft:rgba(217,119,79,.12); --brand-line:rgba(217,119,79,.30);
+    --accent:#D9774F; --accent-deep:#B24E33; --accent-soft:rgba(217,119,79,.16);
+    --bg:#F1ECE3; --paper:#FBF8F2; --ink:#2A2620; --ink-mid:#6E6557; --ink-sub:#A39A8B; --line:#E4D9C7;
+    --head:'M PLUS Rounded 1c';
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;line-height:1.7;}
+  .doc{max-width:880px;margin:0 auto;background:var(--paper);box-shadow:0 0 60px rgba(0,0,0,.10);overflow:hidden;}
+  .hero{position:relative;background:linear-gradient(160deg,var(--brand-soft) 0%,var(--bg) 70%);padding:50px 52px 40px;border-bottom:3px solid var(--brand-line);overflow:hidden;}
+  .hero .coin{position:absolute;width:160px;height:160px;border-radius:50%;background:var(--accent);opacity:.15;top:-52px;right:-36px;}
+  .hero .chan{display:inline-flex;align-items:center;gap:12px;margin-bottom:18px;}
+  .hero .chan img{width:50px;height:50px;border-radius:50%;border:2px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.16);}
+  .hero .chan b{font-family:var(--head);font-weight:900;color:var(--brand-deep);font-size:17px;}
+  .hero .chan b small{display:block;font-size:11px;color:var(--ink-mid);font-weight:500;letter-spacing:.4px;}
+  .eyebrow{font-family:var(--head);font-weight:900;color:var(--brand-deep);letter-spacing:2px;font-size:13px;display:inline-flex;align-items:center;gap:9px;margin-bottom:12px;}
+  .eyebrow::before{content:'🎁';font-size:15px;}
+  h1{font-family:var(--head);font-weight:900;font-size:34px;line-height:1.3;color:var(--ink);}
+  h1 .hl{color:var(--brand-deep);}
+  .hero p.sub{font-size:16px;color:var(--ink-mid);font-weight:700;margin-top:14px;max-width:680px;}
+  section{padding:36px 52px;border-bottom:1px solid var(--line);}
+  .sec-h{display:flex;align-items:center;gap:13px;margin-bottom:16px;}
+  .sec-h .no{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--accent);color:var(--ink);font-family:var(--head);font-weight:900;font-size:18px;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 0 var(--accent-deep);}
+  .sec-h h2{font-family:var(--head);font-weight:900;font-size:22px;color:var(--ink);}
+  p.body{font-size:15.5px;color:var(--ink);margin-bottom:10px;}
+  .checks{list-style:none;margin-bottom:16px;} .checks li{font-size:14.5px;color:var(--ink);padding:6px 0 6px 26px;position:relative;}
+  .checks li::before{content:'✔';position:absolute;left:2px;color:var(--brand);font-weight:900;}
+  pre.prompt{background:var(--ink);color:#ECECEA;border-radius:12px;padding:18px 20px;
+    white-space:pre-wrap;word-break:break-word;font-size:13px;line-height:1.7;
+    max-height:420px;overflow-y:auto;font-family:ui-monospace,Menlo,monospace;margin-bottom:14px;}
+  .btnrow{display:flex;gap:10px;flex-wrap:wrap;}
+  .btn{display:inline-flex;align-items:center;gap:8px;background:var(--accent);border:2px solid var(--brand-deep);
+    color:var(--ink);border-radius:999px;padding:10px 22px;font-weight:900;font-size:14px;cursor:pointer;text-decoration:none;font-family:var(--head);}
+  .btn.ghost{background:var(--paper);border:1.5px solid var(--line);color:var(--brand-deep);}
+  .btn:hover{filter:brightness(0.96);}
+  .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;}
+  .toc a{font-size:13px;font-weight:700;color:var(--brand-deep);text-decoration:none;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:6px 14px;}
+  .box{background:var(--accent-soft);border:1.5px solid var(--accent);border-radius:12px;padding:18px 20px;margin-top:8px;}
+  .box h3{font-family:var(--head);font-weight:900;color:var(--accent-deep);font-size:15px;margin-bottom:8px;}
+  .box ul{margin-left:18px;font-size:13.5px;color:var(--ink);} .box li{margin-bottom:5px;}
+  ol.steps2{margin-left:20px;font-size:14.5px;color:var(--ink);} ol.steps2 li{margin-bottom:8px;}
+  footer{background:var(--ink);color:#EBEBE7;padding:28px 52px;font-size:12.5px;text-align:center;}
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="hero">
+    <span class="coin"></span>
+    <div class="hero chan"><img src="data:image/jpeg;base64,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" alt=""><b>ClaudeCodeチャンネル<small>Claude Code を学ぶ</small></b></div>
+    <div class="eyebrow">プレゼントキット</div>
+    <h1><span class="hl">AIエージェントでLINE運用を自動化する教科書</span><br>プレゼントキット</h1>
+    <p class="sub">「AIエージェントでLINE運用を自動化する教科書」を最後まで見てくださった方への特典です。LINE Harnessのセットアップ手順、Lステップのタグ作成自動化Skill、LINE Harness運用Skills集、コピペで使えるプロンプト集の4点を、コピペ・ダウンロードどちらでも受け取れます。</p>
+    <div class="toc">
+      <a href="#kit1">① セットアップチェックリスト</a>
+      <a href="#kit2">② Lステップ タグ自動化Skill</a>
+      <a href="#kit3">③ LINE Harness運用Skills集</a>
+      <a href="#kit4">④ プロンプトまとめ</a>
+    </div>
+  </div>
+
+  <section id="kit1">
+    <div class="sec-h"><div class="no">1</div><h2>LINE Harness セットアップ完全チェックリスト</h2></div>
+    <p class="body">開発者本人による解説動画の実演をもとにした、事前準備からWebhook接続完了までのチェックリストです。つまずきやすいポイントも含めています。</p>
+    <ul class="checks">
+      <li>Cloudflare・LINE公式アカウント・LINE開発者アカウントの準備手順</li>
+      <li>スコープのチェック漏れ、友達追加オプションのリンク忘れなど実際のハマりポイント</li>
+      <li>Webhook接続・LIFFエンドポイント差し替えまでの最終仕上げ</li>
+    </ul>
+    <pre class="prompt" id="p1">■ 事前準備（目安20分・すべて無料）
+
+□ 1. Cloudflareアカウントを作る
+  - Googleアカウント等でサインアップ
+  - 「R2オブジェクトストレージ」を有効化（LINEでの画像/動画配信に使用）
+    → クレジットカード登録が必要だが、10GBまでは請求0円
+    → 「Continue to R2」でアクティベート完了を確認
+
+□ 2. LINE公式アカウントを作る
+  - LINEアカウント or メールアドレスで登録 → 電話番号認証
+  - アカウント名・メールアドレス・業種を入力（業種は後から変更可）
+  - 「チャット」→「応答設定」で 挨拶メッセージOFF・応答メッセージOFF に変更
+  - 「メッセージAPI設定を開く」→利用開始に同意→プロバイダー名を設定
+    → チャネルID・チャネルシークレットが発行されるので必ず控える
+
+□ 3. LINE開発者アカウントを作る（LINE公式アカウントと連携）
+  - 同じプロバイダー内に「LINEログインチャンネル」を新規作成
+    地域=日本 / アプリタイプ=Webアプリ
+  - ⚠️ 作成後は必ず「公開」にする（「開発中」のままだと後で正常に動かない）
+  - チャネルIDを控える
+  - 「LIFF」タブでアプリを追加
+    サイズ=フルサイズ / エンドポイントURLはいったん仮のURL（例: https://example.com）でOK（後で差し替え）
+    ⚠️ スコープは3つとも必ずチェック（「プロフィール」のチェック漏れは開発者本人も実際にハマった既知のポイント）
+    友達追加オプション = アグレッシブ
+    → 発行されたLIFF IDを控える
+  - 「メッセージAPI設定」タブでチャネルアクセストークン（長期）を発行して控える
+  - ⚠️ 見落としがちな最終設定: LINEログインチャンネルの画面を一番下までスクロールし、「友達追加オプション」で作成したLINE公式アカウントをリンクする（これを忘れると友達登録が正常に機能しない）
+
+■ インストール（数分）
+
+□ 4. ターミナルで実行
+  npx create-line-harness@latest &lt;プロジェクト名&gt;
+  ⚠️ プロジェクト名は英数字のみ（日本語不可）
+  ⚠️ 同じCloudflareアカウントに同名で複数回デプロイすると上書きされる。複数運用するなら名前を変える
+
+□ 5. 控えておいた4つの値を順番に入力
+  チャネルシークレット → 長期アクセストークン → チャネルID → LIFF ID
+
+□ 6. MCPサーバー設定のプロンプトが出たら「Yes」を推奨（Claude Code/Codexから自然言語で操作できるようになる）
+
+■ 最終仕上げ（セットアップ完了後）
+
+□ 7. LINEの応答設定に戻り、表示されたWebhook URLを貼り付けて「Webhookの利用」をON
+□ 8. LIFFのエンドポイントURLを、仮のURLから実際のURLに貼り替え
+  ⚠️ 貼り付け時に末尾へ余分な空白が入っていないか確認
+□ 9. 「友達追加URL」（QRコード）を取得し、実機で読み取って動作確認
+□ 10. 管理画面URL＋パスワード（APIキー）でログインし、アカウントが表示されることを確認
+□ 11. 【重要・自動では設定されない】「友達追加時」トリガーのステップ配信シナリオを作成し、挨拶メッセージを設定する
+
+■ 覚えておきたいこと
+
+- ここまでの基本セットアップ・運用は Claude Code / Codex を一切使わなくても完結する
+- Claude Code / Codex が本領を発揮するのは、フォーム作成やシナリオの自動生成など、もう一段進んだカスタマイズをする時</pre>
+    <div class="btnrow">
+      <button class="btn" onclick="copyPrompt(&#39;p1&#39;, this)">📋 コピー</button>
+      <button class="btn ghost" onclick="downloadText(&#39;p1&#39;,&#39;line-harness-setup-checklist.md&#39;, this)">⬇ ダウンロード（.md）</button>
+    </div>
+  </section>
+
+  <section id="kit2">
+    <div class="sec-h"><div class="no">2</div><h2>Lステップ タグ作成自動化 Skill（Claude Code用）</h2></div>
+    <p class="body">Lステップの公式API連携機能（2025年12月〜提供）を使って、外部イベントをきっかけに友だちへタグを自動付与する仕組みを、Claude Codeと一緒に組み立てるためのSkillです。</p>
+    <ul class="checks">
+      <li>Lステップ管理画面側の前提設定（エンドポイント作成・トークン発行）を確認する会話フロー付き</li>
+      <li>Node.js版のリクエストひな形コード同梱</li>
+      <li>アクセストークンの安全な扱い方・存在しないURLを推測しない注意事項つき</li>
+    </ul>
+    <pre class="prompt" id="p2">---
+name: lstep-tag-automation
+description: Lステップの公式API連携機能を使って、外部イベント発生時に友だちへタグを自動付与するリクエストコードを組み立てる。Lステップの管理画面でAPI連携の設定（エンドポイント作成・パラメータ定義・トークン発行）を終えたユーザーが、実際の連携コード（cURL/Node.js等）を組みたいときに使う。
+---
+
+# Lステップ タグ作成自動化 Skill
+
+## 前提（ユーザーに必ず確認する）
+
+Lステップの「API連携」機能は2025年12月に追加された公式機能です。実行前に、ユーザーが管理画面側で以下を済ませているか確認してください。済んでいなければ先にLステップ管理画面での設定を案内する。
+
+1. **API連携機能はプロプラン以上の有料オプションです**（🔶目安: 月額11,000円程度、Webhookを併用中の場合はさらに+5,500円程度が必要とされています。金額は変更される可能性があるため、契約中のプラン・料金は必ずLステップ公式サイト／管理画面で確認してください）。下位プラン・無料枠では利用できないため、着手前にユーザーの契約プランを確認する
+2. Lステップ管理画面の「API連携」＞「認証」タブでアクセストークンを発行済みか
+3. タグ付けの「エンドポイント」を作成済みか（管理画面上でJSONキー・データ型・ラベルを設定する）
+4. どのイベント（例: フォーム回答・決済完了・外部システムのWebhookなど）をきっかけにタグを付けたいか
+
+## リクエストの組み立て方（公式仕様）
+
+Lステップの公式API連携は以下の形式に従う。ユーザーから聞いたパラメータ名・タグ名を使って、この形式でリクエストを生成する。
+
+- 認証: `Authorization: Bearer &lt;アクセストークン&gt;` ヘッダー
+- Content-Type: `application/json`
+- メソッド: POST
+- ボディ: `{"uid": "&lt;Lステップ友だちのユーザーID&gt;", "params": {"&lt;JSONキー&gt;": "&lt;値&gt;"}}`
+- レート制限: 🔶プロプランで月5万回、秒間はどのプランも10回が目安とされています（連続実行するツールを組む場合は間隔を空ける）。最新の正確な上限は必ずLステップ公式サイトで確認してください
+
+## 生成するコード例（Node.js版のひな形）
+
+```javascript
+async function tagLstepFriend(uid, params, endpointUrl, accessToken) {
+  const res = await fetch(endpointUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ uid, params }),
+  });
+  if (!res.ok) throw new Error(`Lステップ API error: ${res.status}`);
+  return res.json();
+}
+```
+
+エンドポイントURLはLステップ管理画面でユーザーが作成したエンドポイントごとに個別発行されるため、必ずユーザー本人に確認して埋め込む。存在しないURLを推測で書かない。
+
+## 会話の進め方
+
+1. 「どんなきっかけで、どんなタグを付けたいですか？」を聞く（例: 「決済完了webhookを受けたらVIPタグを付けたい」）
+2. 上記の前提が未設定なら、Lステップ管理画面での設定手順（エンドポイント作成→パラメータ定義→トークン取得）を案内する
+3. 設定済みなら、エンドポイントURL・アクセストークン（環境変数での管理を推奨）・パラメータ名を聞き取り、上記のひな形にはめ込んだコードを生成する
+4. 生成したコードは必ずユーザーにテスト実行してもらい、実際にタグが付くことを確認してから本番導入するよう伝える
+
+## 注意事項
+
+- アクセストークンは環境変数（`.env`等）で管理し、コードに直書きしない
+- 存在しないエンドポイントURLや仕様を推測で生成しない。不明な点は必ずLステップ公式リファレンスをユーザーに確認してもらう</pre>
+    <div class="btnrow">
+      <button class="btn" onclick="copyPrompt(&#39;p2&#39;, this)">📋 コピー</button>
+      <button class="btn ghost" onclick="downloadText(&#39;p2&#39;,&#39;lstep-tag-automation-skill.md&#39;, this)">⬇ ダウンロード（.md）</button>
+    </div>
+  </section>
+
+  <section id="kit3">
+    <div class="sec-h"><div class="no">3</div><h2>LINE Harness運用Skills集（Claude Code用）</h2></div>
+    <p class="body">LINE HarnessのMCPサーバーが接続された状態のClaude Codeで、よくある運用タスクを自然言語1つで済ませるためのSkillです。</p>
+    <ul class="checks">
+      <li>友だち追加時のシナリオ作成・セグメント配信・クリック解析・広告連携設定の6パターン</li>
+      <li>「取り消せない操作」の前に必ず確認を取る運用ルール込み</li>
+      <li>存在しないID・実データの扱いに関する注意事項つき</li>
+    </ul>
+    <pre class="prompt" id="p3">---
+name: line-harness-ops
+description: LINE HarnessのMCPサーバーが接続されたClaude Codeで、シナリオ作成・セグメント配信・クリック解析・広告連携設定など、よくあるLINE運用タスクを自然言語の指示から実行する。「シナリオ作って」「配信して」「クリック数教えて」「広告連携を確認して」等の依頼で使う。
+---
+
+# LINE Harness運用Skills集
+
+LINE Harness MCPサーバーの各ツールを、目的別の会話パターンに対応させたガイドです。ユーザーの依頼文から該当パターンを判断し、対応するMCPツールを呼び出してください。
+
+**重要な前提**: 以下に登場するツール名・パラメータ名は、本資料の執筆環境で実際にLINE Harness MCPサーバーに接続して確認した2026年7月時点（v0.14.1相当）の仕様です。ただしLINE Harnessは開発速度が速く、バージョンアップで変わる可能性があります。**必ず実行前にMCPのツール一覧（tools/list等）で正式名称・パラメータを確認してから使ってください。** 一致しない場合はツール一覧を優先し、本Skillの記述を鵜呑みにしないでください。
+
+## パターン1: 友だち追加時の自動シナリオを作る
+依頼例: 「友だち追加した人に3日間のウェルカムシナリオを流して」
+→ `create_scenario`（name, triggerType: friend_add, steps: [{delay, type, content}, ...]）で、ユーザーが指定した本数・間隔のstepsを組み立てる。delayは「0m」（即時）「30m」（30分後）「24h」（24時間後）のような形式で指定する。typeは"text"または"flex"。
+
+## パターン2: タグに応じたシナリオを作る
+依頼例: 「VIPタグを付けた人にフォローアップシナリオを流して」
+→ 先に `manage_tags`（action: list）でタグの存在を確認し、無ければ `manage_tags`（action: create, tagName, tagColor） → `create_scenario`（name, triggerType: tag_added, triggerTagId: 該当タグID, steps: [...]）
+
+## パターン3: セグメント配信をする
+依頼例: 「先月申込んだ人にセミナーの案内を配信して」
+→ `list_crm_objects`（objectType: tags）等で該当タグ/条件を確認したうえで、以下のいずれかで実行する。
+  - 全員/タグ単位の配信は `broadcast`（targetType: all または tag, targetTagId, messageType, messageContent）で即時送信、または `manage_broadcasts`（action: create_draft → 内容確認 → action: send）で下書きしてから送る
+  - 条件を組み合わせたセグメント配信は `broadcast`（targetType: segment, segmentConditions: {operator, rules:[...]}）、または `manage_broadcasts`（action: send_to_segment, segmentConditions）※segment配信には下書き保存が無く即時送信になる点に注意
+  - **配信は取り消せないため、実際に送信する前に、対象人数・メッセージ内容を必ずユーザーに見せて確認を取る**
+
+## パターン4: クリック解析・コンバージョンレポートをまとめる
+依頼例: 「今週のトラッキングリンクのクリック数を教えて」
+→ `list_crm_objects`（objectType: tracked_links）で対象リンクのIDを特定し、`get_link_clicks`（linkId）で集計。広告連携の成果を聞かれたら`manage_ad_platforms`（action: list）でplatformIdを確認→`get_conversion_logs`（platformId）で送信ログを確認
+
+## パターン5: 広告プラットフォーム連携をセットアップする
+依頼例: 「Meta広告のコンバージョン計測を設定して」
+→ `manage_ad_platforms`（action: create, name: meta, config: {pixel_id, access_token}）。X/Google/TikTokの場合はconfigの中身が変わる（例: Googleは{customer_id, conversion_action_id, oauth_token}）ので、実行前にツールのパラメータ説明を確認する。アクセストークン等の秘匿情報は必ずユーザー本人から直接受け取り、会話ログや生成物に平文で残さない
+
+## パターン6: リッチメニューを作る
+依頼例: 「メニューに問い合わせボタンを追加したい」
+→ `create_rich_menu`（name, areas: JSON文字列で[{bounds:{x,y,width,height}, action:{type, uri/text/data}}]）で組み立てる。画像はimageData（base64）で渡すか、既存メニューの一覧確認は`manage_rich_menus`（action: list）で行う。
+
+## 共通の注意事項
+- **配信・広告連携・友だち情報の変更など「取り消せない/外部に影響する」操作の前には、必ず内容をユーザーに見せて実行の承認を得る**
+- 存在しないタグID・シナリオID・アカウントIDを推測で使わない。必ず`list`系ツール（`list_crm_objects`, `manage_tags`(list), `list_friends`等）で実在確認してから操作する
+- 個別の友だちの実データ（氏名・会話内容等）を資料や生成物に転記しない
+- **本Skillに書かれたツール名・パラメータ名は執筆時点の実接続確認に基づく例であり、絶対の仕様書ではない。実行前に必ずツール一覧で正式名称・必須パラメータを確認すること**</pre>
+    <div class="btnrow">
+      <button class="btn" onclick="copyPrompt(&#39;p3&#39;, this)">📋 コピー</button>
+      <button class="btn ghost" onclick="downloadText(&#39;p3&#39;,&#39;line-harness-ops-skills.md&#39;, this)">⬇ ダウンロード（.md）</button>
+    </div>
+  </section>
+
+  <section id="kit4">
+    <div class="sec-h"><div class="no">4</div><h2>LINE運用プロンプトまとめ — Lステップ×LINE Harness</h2></div>
+    <p class="body">コピペで使える自然言語プロンプト集です。ご自身の環境（Lステップの外部連携ツール、またはLINE Harness接続済みのClaude Code/Codex）に合わせてお使いください。</p>
+    <ul class="checks">
+      <li>LINE Harness × Claude Code/Codexにそのまま話しかけられるプロンプト8本</li>
+      <li>Lステップ × 外部AI連携を検討するときの依頼文4本</li>
+      <li>両方共通の「まず小さく試す」心構えつき</li>
+    </ul>
+    <pre class="prompt" id="p4">■ LINE Harness × Claude Code/Codex（MCP接続済み・自然言語でそのまま話しかける）
+
+- 「友だち数と、直近のシナリオ・配信の状況を教えて」
+- 「来週のセミナー参加者に、3日前と前日にリマインドを送るシナリオを作って」
+- 「友だちのタグ分布を集計して、フォローが手薄なセグメントを教えて」
+- 「フォームを作って、回答した人にVIPタグを付けてフォローシナリオを始めて」
+- 「先週作ったトラッキングリンクのクリック数を教えて」
+- 「Meta広告のコンバージョン計測を設定したい」
+- 「友だち追加時に流れるウェルカムメッセージを3通、間隔を空けて設定して」
+- 「今のリッチメニューの構成を教えて。問い合わせボタンを追加したい」
+
+■ Lステップ × 外部AI（Webhook/API連携を組むとき、makeやDify等のノーコードツール・開発者への依頼文として）
+
+- 「Lステップの友だち登録Webhookを受けたら、OpenAI APIで簡単な質問に自動応答するボットを作りたい。実装時間の目安と手順を教えて」
+- 「業種特化のQ&amp;Aボットを作りたい。Difyのナレッジベースと連携する構成を教えて」
+- 「Lステップの公式API連携機能を使って、決済完了イベントをきっかけに友だちへ自動でタグを付けたい。エンドポイント設計からリクエスト例まで教えて」
+- 「Lステップで集めた友だち情報を、外部システム（スプレッドシート等）と同期する仕組みを組みたい」
+
+■ 使い方の心構え（両方共通）
+
+- 最初の1回は必ず小さい範囲（テスト用の1アカウント・少人数のセグメント）で試してから本番に反映する
+- 配信・タグ変更・広告連携などは「取り消せない/実際に相手に届く」操作なので、実行前に内容を必ず自分の目で確認する</pre>
+    <div class="btnrow">
+      <button class="btn" onclick="copyPrompt(&#39;p4&#39;, this)">📋 コピー</button>
+      <button class="btn ghost" onclick="downloadText(&#39;p4&#39;,&#39;line-ops-prompts.md&#39;, this)">⬇ ダウンロード（.md）</button>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-h"><div class="no">!</div><h2>受け取り方・使い方</h2></div>
+    <ol class="steps2">
+      <li>上の各キットにある「📋 コピー」ボタンでクリップボードにコピー、または「⬇ ダウンロード」ボタンでファイル保存する（GitHubで見ている場合は kit/ フォルダの各ファイルからも同じ内容を受け取れます）</li>
+      <li>①はセットアップ前に手元で開いてチェックしながら進める</li>
+      <li>②③はコピーした内容を <code>.claude/skills/&lt;name&gt;/SKILL.md</code> として保存し、Claude Codeに話しかけて起動する</li>
+      <li>④は該当するプロンプトをそのまま貼り付け、日時・人数・タグ名などをご自身の状況に置き換えて使う</li>
+    </ol>
+    <div class="box">
+      <h3>⚠️ 使う前に確認してほしいこと</h3>
+      <ul>
+        <li>生成されたコード・シナリオは、必ず小さい範囲でテストしてから本番に反映してください</li>
+        <li>配信・タグ変更・広告連携など「取り消せない/外部に影響する」操作は、実行前に内容を必ず自分の目で確認してください</li>
+        <li>各ツールの仕様（API・MCPツール名など）はバージョンによって変わることがあります。詰まったら公式ドキュメントを確認してください</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<footer>🎁 このプレゼントキットは自由にコピー・保存してお使いください。</footer>
+
+<script>
+function copyTextWithFallback(text){
+  function fallback(){
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text; document.body.appendChild(ta); ta.select();
+      const ok = document.execCommand('copy');
+      ta.remove();
+      return ok;
+    } catch(e){ return false; }
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    return navigator.clipboard.writeText(text).then(() => true).catch(fallback);
+  }
+  return Promise.resolve(fallback());
+}
+
+function showCopyResult(btn, ok){
+  const orig = btn.textContent;
+  btn.textContent = ok ? '✔ コピーしました！' : '✖ コピーできませんでした。⬇ ダウンロードをご利用ください';
+  setTimeout(() => { btn.textContent = orig; }, ok ? 1800 : 3500);
+}
+
+async function copyPrompt(id, btn){
+  const ok = await copyTextWithFallback(document.getElementById(id).textContent);
+  showCopyResult(btn, ok);
+}
+
+function downloadText(id, filename, btn){
+  try {
+    const text = document.getElementById(id).textContent;
+    const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 2000);
+  } catch(e){
+    if(btn){ const orig = btn.textContent; btn.textContent = '✖ 保存できません。上のコピーをご利用ください'; setTimeout(() => { btn.textContent = orig; }, 3500); }
+  }
+}
+</script>
+</body>
+</html>
