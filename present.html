@@ -101,13 +101,15 @@
     → 発行されたLIFF IDを控える
   - 「メッセージAPI設定」タブでチャネルアクセストークン（長期）を発行して控える
   - ⚠️ 見落としがちな最終設定: LINEログインチャンネルの画面を一番下までスクロールし、「友達追加オプション」で作成したLINE公式アカウントをリンクする（これを忘れると友達登録が正常に機能しない）
+  - ⚠️【動画公開後に開発者本人が追記で訂正した重要設定】LINEログインチャンネルの「LINEログイン設定」で「ウェブアプリでLINEログインを利用する」をオンにし、「Callback URL」に https://{あなたのworker名}.workers.dev/auth/callback を登録する（これを忘れるとPCからQRコードを踏んだ人が「Invalid redirect_uri」エラーで友だち追加できない。スマホはLIFF経由で動くため気づきにくい。最新版のcreate-line-harness@latestではセットアップ末尾でこの案内が自動表示されるようになっている）
 
 ■ インストール（数分）
 
 □ 4. ターミナルで実行
-  npx create-line-harness@latest &lt;プロジェクト名&gt;
-  ⚠️ プロジェクト名は英数字のみ（日本語不可）
+  npx create-line-harness@latest
+  これで3ステップでの導入が始まる。プロジェクト名（英数字のみ）を続けて指定することもできるが必須ではない
   ⚠️ 同じCloudflareアカウントに同名で複数回デプロイすると上書きされる。複数運用するなら名前を変える
+  ターミナルに不慣れな方は、開発者が用意した専用セットアップガイド（Windows/Mac別・画面つき）が便利: https://line-crm-worker.line-crm-api.workers.dev/setup
 
 □ 5. 控えておいた4つの値を順番に入力
   チャネルシークレット → 長期アクセストークン → チャネルID → LIFF ID
@@ -122,6 +124,12 @@
 □ 9. 「友達追加URL」（QRコード）を取得し、実機で読み取って動作確認
 □ 10. 管理画面URL＋パスワード（APIキー）でログインし、アカウントが表示されることを確認
 □ 11. 【重要・自動では設定されない】「友達追加時」トリガーのステップ配信シナリオを作成し、挨拶メッセージを設定する
+
+■ 参考リンク
+
+  公式セットアップガイド（初心者向け・Windows/Mac別）: https://line-crm-worker.line-crm-api.workers.dev/setup
+  GitHubリポジトリ: https://github.com/Shudesu/line-harness-oss
+  公式ドキュメント（Wiki）: https://harness-wiki.pages.dev/line
 
 ■ 覚えておきたいこと
 

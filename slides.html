@@ -601,9 +601,10 @@
   <p class="eyebrow">5-2. 導入方法をステップバイステップで</p>
   <h2 class="stitle" style="text-align:center;">4つの値を控えたら、ターミナルで1コマンド</h2>
   <div class="prompt">
-    npx create-line-harness@latest &lt;プロジェクト名&gt;
+    npx create-line-harness@latest
   </div>
-  <p class="lead" style="margin-top:18px;max-width:940px;font-size:18px;">プロジェクト名は英数字のみ。同じ名前で複数回デプロイすると上書きされるため、複数のLINE公式アカウントを運用する場合は別名を付ける必要があります。控えた4つの値（チャネルID・チャネルシークレット・チャネルアクセストークン・LIFF ID）を順番に入力。MCPサーバー設定を聞かれたら「Yes」を推奨</p>
+  <p class="lead" style="margin-top:18px;max-width:940px;font-size:18px;">これで3ステップの導入が始まります。プロジェクト名（英数字のみ）を続けて指定することもできますが必須ではありません（同名で複数回デプロイすると上書きされる点だけ注意）。控えた4つの値（チャネルID・チャネルシークレット・チャネルアクセストークン・LIFF ID）を順番に入力。MCPサーバー設定を聞かれたら「Yes」を推奨</p>
+  <p class="note-box" style="margin-top:14px;max-width:940px;font-size:15px;">ターミナルに不慣れな方向けの公式セットアップガイド（Windows/Mac別）: line-crm-worker.line-crm-api.workers.dev/setup</p>
   <span class="kick">§5 LINE Harness編</span><span class="sno">30</span>
 </div>
 
@@ -617,8 +618,10 @@
     <li>LIFFのエンドポイントURLを実際のURLに差し替える（末尾の余分な空白に要注意）</li>
     <li>友だち追加URL（QRコード）を取得し、管理画面ログインを確認</li>
     <li>「友だち追加時」に発火するシナリオ（挨拶メッセージ）を手動作成</li>
+    <li>【動画公開後に開発者が追記で訂正】LINEログインチャンネルで「Callback URL」（<code>https://{worker名}.workers.dev/auth/callback</code>）を登録。忘れるとPCからのQRで友だち追加できない</li>
   </ul>
   <p class="note-box" style="margin-top:14px;max-width:940px;font-size:16px;font-weight:700;">この基本セットアップ・一般的な運用には、Claude Codeは一切使われていません。ここまではCloudflare・ターミナル・LINE管理画面だけで完結します。Claude Codeが本領を発揮するのは、フォーム作成やシナリオ自動生成など、もう一段進んだカスタマイズをする時です</p>
+  <p style="margin-top:10px;max-width:940px;font-size:14px;color:var(--ink-mid);">詳しくは公式ドキュメント（harness-wiki.pages.dev/line）・GitHub（github.com/Shudesu/line-harness-oss）でも確認できます</p>
   <span class="kick">§5 LINE Harness編</span><span class="sno">31</span>
 </div>
 

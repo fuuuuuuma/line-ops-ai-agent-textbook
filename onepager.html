@@ -359,9 +359,9 @@
       </ul>
     </div>
     <div class="secsub" style="font-size:14px;margin-top:16px;">インストール</div>
-    <p class="body">事前準備で控えた4つの値（チャネルID・チャネルシークレット・チャネルアクセストークン・LIFF ID）を用意したら、ターミナルで次の1コマンドを実行します。</p>
-    <div class="prompt"><span class="cm"># プロジェクト名は英数字のみ。複数アカウント運用時は別名に</span><br>npx create-line-harness@latest &lt;プロジェクト名&gt;</div>
-    <p class="note" style="margin-top:10px;">コマンド実行後、控えた4つの値を順番に入力。途中でMCPサーバー設定を聞かれた場合は「Yes」と答えることを推奨します。</p>
+    <p class="body">事前準備で控えた4つの値（チャネルID・チャネルシークレット・チャネルアクセストークン・LIFF ID）を用意したら、ターミナルで次のコマンドを実行します。</p>
+    <div class="prompt">npx create-line-harness@latest</div>
+    <p class="note" style="margin-top:10px;">これで3ステップの導入が始まります。プロジェクト名（英数字のみ）は続けて指定できますが必須ではありません（同名で複数回デプロイすると上書きされる点に注意）。コマンド実行後、控えた4つの値を順番に入力。途中でMCPサーバー設定を聞かれた場合は「Yes」と答えることを推奨します。ターミナルに不慣れな方は、開発者が用意した専用セットアップガイド（Windows/Mac別）<a href="https://line-crm-worker.line-crm-api.workers.dev/setup">line-crm-worker.line-crm-api.workers.dev/setup</a> が便利です。</p>
     <div class="secsub" style="font-size:14px;margin-top:16px;">最終仕上げ</div>
     <ul class="checks">
       <li>LINEの応答設定に戻り、Webhook URLを貼り付けて「Webhookの利用」をONにする</li>
@@ -369,8 +369,9 @@
       <li>友だち追加URL（QRコード）を取得する</li>
       <li>管理画面にログインできることを確認する</li>
       <li>「友だち追加時」に発火するシナリオ（挨拶メッセージ）を手動で作成する</li>
+      <li>【動画公開後に開発者が追記で訂正】LINEログインチャンネルで「Callback URL」（<code>https://{worker名}.workers.dev/auth/callback</code>）を登録する。忘れるとPCからのQRで「Invalid redirect_uri」エラーになる</li>
     </ul>
-    <p class="note" style="margin-top:10px;">この基本セットアップ・一般的な運用にClaude Codeは一切使われていません。ここまではCloudflare・ターミナル・LINEの管理画面だけで完結します。Claude Codeが本領を発揮するのは、フォーム作成やシナリオの自動生成など、もう一段進んだカスタマイズをする時です。</p>
+    <p class="note" style="margin-top:10px;">この基本セットアップ・一般的な運用にClaude Codeは一切使われていません。ここまではCloudflare・ターミナル・LINEの管理画面だけで完結します。Claude Codeが本領を発揮するのは、フォーム作成やシナリオの自動生成など、もう一段進んだカスタマイズをする時です。詳しくは公式Wiki（<a href="https://harness-wiki.pages.dev/line">harness-wiki.pages.dev/line</a>）・GitHub（<a href="https://github.com/Shudesu/line-harness-oss">github.com/Shudesu/line-harness-oss</a>）も参照してください。</p>
 
     <div class="secsub">5-3. 実際にできること</div>
     <p class="body">MCPサーバー経由でClaude Codeから自然言語操作ができる範囲は非常に広範です。本資料の執筆環境でも実際にLINE HarnessのMCPサーバーに接続して確認したところ、次のような<span class="hl">30種近いツール</span>が利用可能でした。</p>
