@@ -2,7 +2,7 @@
 
 **副題: Lステップの単純作業をComputer Useで、そしてオープンソース「LINE Harness」という選択肢を**
 
-📊 [スライド資料を見る](./slides.html) ｜ 📄 [1枚まとめ資料を見る](./onepager.html) ｜ 🎁 [プレゼントキットを受け取る](./present.html)
+📊 [スライド資料を見る](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/slides.html) ｜ 📄 [1枚まとめ資料を見る](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/onepager.html) ｜ 🎁 [プレゼントキットを受け取る](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html)
 
 ---
 
@@ -299,19 +299,19 @@ LステップNo.1代理店を名乗る運営者からは、次のような懸念
 
 どちらか一方が絶対的な正解というわけではありません。すでにLステップで運用中なら、無理に乗り換える必要はなく、まずはComputer UseやWebhook連携でのAI活用から試すのが現実的です。これから新しくLINE運用を始める、コストをかけずに試したいという場合は、LINE Harnessの無料枠から触ってみるという選択肢が増えたことになります。
 
-そして、実際に運用・導入する際に手を動かして試せるよう、今回は4点のプレゼントキットを用意しました。すべて [present.html](./present.html) からコピー＆ダウンロードで受け取れます（GitHubで見ている場合は `kit/` フォルダの各ファイルからも同じ内容を受け取れます）。
+そして、実際に運用・導入する際に手を動かして試せるよう、今回は4点のプレゼントキットを用意しました。すべて [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html) からコピー＆ダウンロードで受け取れます（GitHubで見ている場合は `kit/` フォルダの各ファイルからも同じ内容を受け取れます）。
 
 | # | 名前 | 一言説明 | 受け取り先 |
 |---|---|---|---|
-| 1 | LINE Harness セットアップ完全チェックリスト | 開発者本人の実演をもとにした、事前準備からWebhook接続完了までのチェックリスト（ハマりポイント込み） | [present.html](./present.html#kit1) ／ [kit/line-harness-setup-checklist.md](./kit/line-harness-setup-checklist.md) |
-| 2 | Lステップ タグ作成自動化 Skill（Claude Code用） | Computer Useや公式API連携機能を使い、タグ・流入経路・テンプレートの大量作成を自動化する仕組みを組み立てるSkill | [present.html](./present.html#kit2) ／ [kit/lstep-tag-automation-skill.md](./kit/lstep-tag-automation-skill.md) |
-| 3 | LINE Harness運用Skills集（Claude Code用） | MCPサーバー接続済みのClaude Codeで、シナリオ作成・配信・クリック解析等を自然言語で実行するSkill | [present.html](./present.html#kit3) ／ [kit/line-harness-ops-skills.md](./kit/line-harness-ops-skills.md) |
-| 4 | LINE運用プロンプトまとめ | Lステップ×LINE Harness、両方の環境でそのまま使えるコピペ用プロンプト集 | [present.html](./present.html#kit4) ／ [kit/line-ops-prompts.md](./kit/line-ops-prompts.md) |
+| 1 | LINE Harness セットアップ完全チェックリスト | 開発者本人の実演をもとにした、事前準備からWebhook接続完了までのチェックリスト（ハマりポイント込み） | [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html#kit1) ／ [kit/line-harness-setup-checklist.md](./kit/line-harness-setup-checklist.md) |
+| 2 | Lステップ タグ作成自動化 Skill（Claude Code用） | Computer Useや公式API連携機能を使い、タグ・流入経路・テンプレートの大量作成を自動化する仕組みを組み立てるSkill | [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html#kit2) ／ [kit/lstep-tag-automation-skill.md](./kit/lstep-tag-automation-skill.md) |
+| 3 | LINE Harness運用Skills集（Claude Code用） | MCPサーバー接続済みのClaude Codeで、シナリオ作成・配信・クリック解析等を自然言語で実行するSkill | [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html#kit3) ／ [kit/line-harness-ops-skills.md](./kit/line-harness-ops-skills.md) |
+| 4 | LINE運用プロンプトまとめ | Lステップ×LINE Harness、両方の環境でそのまま使えるコピペ用プロンプト集 | [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html#kit4) ／ [kit/line-ops-prompts.md](./kit/line-ops-prompts.md) |
 
-**受け取り方**: [present.html](./present.html) を開き、各キットの「📋 コピー」ボタンでクリップボードにコピー、または「⬇ ダウンロード」ボタンでファイルとして保存してください。GitHub上で `kit/*.md` を直接開き、コードブロックのコピーボタンを使う方法でも受け取れます。
+**受け取り方**: [present.html](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/present.html) を開き、各キットの「📋 コピー」ボタンでクリップボードにコピー、または「⬇ ダウンロード」ボタンでファイルとして保存してください。GitHub上で `kit/*.md` を直接開き、コードブロックのコピーボタンを使う方法でも受け取れます。
 
 なお、本記事で紹介した数字・料金・機能は、各公式サイト（Lステップ公式ブログ、LINE Harness公式サイト・GitHub: https://shudesu.github.io/line-harness-oss/ ／ https://github.com/Shudesu/line-harness-oss ）や、note「Lステップ連携ラボ」（https://note.com/glad_walrus6151）を参照しています。オープンソース・個人開発ペースのプロジェクトである以上、仕様や価格は今後変わっていく可能性があります。導入前には必ず最新情報を公式サイトでご確認ください。
 
-より詳しい図解やビジュアルは [スライド資料](./slides.html)、要点だけをコンパクトに見たい方は [1枚まとめ資料](./onepager.html) もあわせてご覧ください。
+より詳しい図解やビジュアルは [スライド資料](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/slides.html)、要点だけをコンパクトに見たい方は [1枚まとめ資料](https://fuuuuuuma.github.io/line-ops-ai-agent-textbook/onepager.html) もあわせてご覧ください。
 
 ClaudeCodeチャンネル: https://www.youtube.com/channel/UCIAk415K5Z3GvKfwMbb5GWA
