@@ -16,7 +16,6 @@
   *{box-sizing:border-box;margin:0;padding:0;}
   body{background:var(--bg);color:var(--ink);font-family:'Noto Sans JP',-apple-system,'Hiragino Sans','Yu Gothic',sans-serif;line-height:1.7;}
   .doc{max-width:880px;margin:0 auto;background:var(--paper);box-shadow:0 0 60px rgba(0,0,0,.10);overflow:hidden;}
-  .draft-tag{background:var(--brand-deep);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px;letter-spacing:.4px;}
   /* hero */
   .hero{position:relative;background:linear-gradient(160deg,var(--brand-soft) 0%,var(--bg) 70%);padding:50px 52px 44px;border-bottom:3px solid var(--brand-line);overflow:hidden;}
   .hero .coin{position:absolute;width:160px;height:160px;border-radius:50%;background:var(--accent);opacity:.15;top:-52px;right:-36px;}
@@ -141,6 +140,21 @@
   footer .cta{background:var(--accent);color:var(--ink);border-radius:999px;padding:11px 24px;font-family:var(--head);font-weight:900;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:7px;}
   footer .src{font-size:12px;color:#9C9C96;margin-top:16px;line-height:1.8;} footer .src a{color:var(--accent);text-decoration:none;}
   .secsub{font-family:var(--head);font-weight:900;font-size:15px;color:var(--ink);margin:18px 0 10px;}
+  /* LINE Harness公式サイト雰囲気カード */
+  .lh-site{border-radius:16px;padding:26px 24px;text-align:center;}
+  .lh-site .copy{font-size:14px;font-weight:700;letter-spacing:.3px;margin-bottom:10px;}
+  .lh-site .zero{font-family:var(--head);font-weight:900;font-size:52px;line-height:1;margin-bottom:10px;}
+  .lh-site .sub{font-size:12.5px;opacity:.75;}
+  /* Xポストカード */
+  .xcard{background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:18px 20px;}
+  .xcard .xhead{display:flex;align-items:center;gap:10px;margin-bottom:10px;}
+  .xcard .xavatar{width:42px;height:42px;border-radius:50%;background:var(--brand);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--head);font-weight:900;font-size:16px;flex-shrink:0;}
+  .xcard .xname{font-family:var(--head);font-weight:900;font-size:14px;color:var(--ink);}
+  .xcard .xhandle{font-size:12.5px;color:var(--ink-mid);}
+  .xcard .xtime{font-size:11.5px;color:var(--ink-sub);margin-top:2px;}
+  .xcard .xbody{font-size:13.5px;color:var(--ink);line-height:1.75;white-space:pre-line;background:var(--bg);border-radius:10px;padding:13px 15px;margin-bottom:10px;}
+  .xcard .xstats{display:flex;gap:18px;font-size:12px;color:var(--ink-mid);flex-wrap:wrap;}
+  .xcard .xstats b{color:var(--ink);}
 </style>
 </head>
 <body>
@@ -150,177 +164,264 @@
     <div class="chan"><img src="data:image/jpeg;base64,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" alt="ClaudeCodeチャンネル"><b>ClaudeCodeチャンネル<small>Claude Code を学ぶ</small></b></div>
     <div class="eyebrow">ONE-PAGE GUIDE</div>
     <h1><span class="hl">AIエージェント</span>でLINE運用を自動化する教科書<br>Lステップ×LINE Harness 完全ガイド</h1>
-    <p class="sub">LステップとLINE Harness、どちらもAIに任せる時代——この1ページに全体像・比較・使い方・活用例まで詰め込みました。</p>
-    <div class="meta"><span class="k">2026年版</span><span>初心者向け</span><span>所要10分</span><span>図解・比較表つき</span><span>出典つき</span></div>
+    <p class="sub">Lステップの単純作業をComputer Useで肩代わりし、無料オープンソース「LINE Harness」という新しい選択肢も導入する——この1ページに全体の流れを詰め込みました。</p>
+    <div class="meta"><span class="k">2026年版</span><span>初心者向け</span><span>所要10分</span><span>Lステップ編＋LINE Harness編</span></div>
   </div>
 
   <div class="tocbar">
-    <a href="#s1">① なぜ今LINEか</a><a href="#s2">② 構築の大変さ</a><a href="#s3">③ Lステップ</a><a href="#s4">④ LINE Harness</a>
-    <a href="#s5">⑤ 料金・機能</a><a href="#s6">⑥ 使い方</a><a href="#s7">⑦ 事例・活用例</a><a href="#s8">⑧ FAQ・注意</a>
+    <a href="#s1">① LINEはインフラ</a><a href="#s2">② 大変さの正体</a><a href="#s3">③ 2本立て予告</a>
+    <a href="#s4">④ Lステップ編</a><a href="#s5">⑤ LINE Harness編</a><a href="#s6">⑥ まとめ＋プレゼント</a>
   </div>
 
   <!-- TL;DR -->
   <section>
     <div class="sec-h"><div class="no">!</div><h2>まず3行で</h2></div>
     <div class="tldr">
-      <div class="t"><div class="k">POINT 1</div><p>LINE公式アカウントは国内月間利用者1億人（2026年1月発表）が使う主戦場。だからLINE構築自体が職能になっている</p></div>
-      <div class="t"><div class="k">POINT 2</div><p>有料の定番「Lステップ」と無料OSS「LINE Harness」、どちらもAIエージェントと組める時代</p></div>
-      <div class="t"><div class="k">POINT 3</div><p>LINE HarnessはMCPサーバー標準搭載。Claude Codeに話しかけるだけで運用が回る</p></div>
+      <div class="t"><div class="k">POINT 1</div><p>LINE公式アカウントは国内月間利用者1億人（2026年1月発表）が使う、もう避けて通れないインフラ</p></div>
+      <div class="t"><div class="k">POINT 2</div><p>自分でやるのも代行を仕事にするのも大変。だからLステップの単純作業はComputer Useで自動化する</p></div>
+      <div class="t"><div class="k">POINT 3</div><p>無料オープンソース「LINE Harness」ならMCPサーバー標準搭載で、Claude Codeに話しかけるだけで運用できる</p></div>
     </div>
     <div class="secsub">こんな悩み、ありませんか？</div>
-    <ul class="bullets"><li>LINE公式アカウントの手動運用に時間を取られている</li><li>Lステップの構築・設定を外注すると数万〜数十万円かかる</li><li>無料で試したいが何から手をつければいいか分からない</li></ul>
+    <ul class="bullets"><li>LINE公式アカウントの構築・運用に時間を取られている</li><li>Lステップのタグ作成・流入経路設定といった単純作業が地味にきつい</li><li>柔軟性やコストの面でLステップ以外の選択肢も知りたい</li></ul>
   </section>
 
-  <!-- 1 なぜ今LINEか -->
+  <!-- 1 LINE運用はインフラ -->
   <section id="s1">
-    <div class="sec-h"><div class="no">1</div><h2>なぜ今LINEなのか／全体像</h2></div>
-    <div class="row2">
-      <div><p class="body">LINE公式アカウントは <span class="hl">「国内月間利用者数1億人」</span>✅（2026年1月29日, LINEヤフー発表・2025年12月末時点）。60代以上の利用率も約7割に到達し、世代を問わず使われる数少ないチャネルです。全年代の6割超が「チャットで企業に問い合わせたい」と回答しています。（出典: LINEヤフー公式発表／モビルス2025年調査）</p></div>
-      <div class="stats" style="grid-template-columns:1fr;gap:8px;">
-        <div class="stat" style="padding:10px;"><div class="n" style="font-size:24px;">1<small style="font-size:12px;">億人</small></div><div class="u" style="font-size:10.5px;">LINE国内月間利用者数</div><div class="l" style="font-size:11px;margin-top:3px;">✅公式発表</div></div>
-        <div class="stat" style="padding:10px;"><div class="n" style="font-size:24px;">7<small style="font-size:12px;">割</small></div><div class="u" style="font-size:10.5px;">60代以上の利用率</div><div class="l" style="font-size:11px;margin-top:3px;">✅公式発表</div></div>
-        <div class="stat" style="padding:10px;"><div class="n" style="font-size:24px;">6<small style="font-size:12px;">割超</small></div><div class="u" style="font-size:10.5px;">全年代の問い合わせ希望率</div><div class="l" style="font-size:11px;margin-top:3px;">🔶調査ベース</div></div>
-      </div>
-    </div>
-    <div class="secsub">LINE公式アカウント単体では足りない理由</div>
-    <div class="flow">
-      <div class="step"><div class="t">① 友だち追加</div><div class="d">あいさつ止まり</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">② シナリオ配信</div><div class="d">標準機能では困難</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">③ セグメント配信</div><div class="d">タグ設計が必要</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">④ 拡張ツールへ</div><div class="d">Lステップ／LINE Harness</div></div>
-    </div>
-    <p class="note" style="margin-top:10px;">※ LINE公式アカウント単体ではMA的な動きが難しく、拡張ツールの余地が生まれる</p>
-  </section>
-
-  <!-- 2 なぜ今 -->
-  <section id="s2">
-    <div class="sec-h"><div class="no">2</div><h2>LINE構築はなぜ大変なのか</h2></div>
+    <div class="sec-h"><div class="no">1</div><h2>LINE運用は、もう避けて通れないインフラである</h2></div>
+    <p class="body">何か商品を売るにしても、自分で何かサービスを始めるにしても、<span class="hl">LINE公式アカウントの構築・運用はもはや避けて通れないインフラ</span>になっています。LINEヤフー株式会社は2026年1月29日、国内月間利用者数が2025年12月末時点で<span class="hl">1億ユーザーを突破した</span>と正式に発表しました。</p>
     <div class="stats">
-      <div class="stat"><div class="n">9,800<small>万人</small></div><div class="u">LINEの月間利用者数</div><div class="l">✅公式確認済み</div></div>
-      <div class="stat"><div class="n">1.5〜80<small>万円</small></div><div class="u">構築代行の単価幅</div><div class="l">🔶実務者の相場感</div></div>
-      <div class="stat"><div class="n">設定<small>→AI</small></div><div class="u">コモディティ化が進行中</div><div class="l">🔶トレンド</div></div>
+      <div class="stat"><div class="n">1<small>億人</small></div><div class="u">LINE国内月間利用者数</div><div class="l">2026年1月発表・2025年12月末時点</div></div>
+      <div class="stat"><div class="n">7<small>割</small></div><div class="u">60代以上のLINE利用率</div><div class="l">この5年で1割増加</div></div>
+      <div class="stat"><div class="n">6<small>割超</small></div><div class="u">全年代の問い合わせ希望率</div><div class="l">20〜30代は7割に到達</div></div>
     </div>
-    <p class="note" style="margin-top:10px;">※ 市場規模の公式統計は未確認⚠️。単価感はX上の実務者の言及ベース🔶</p>
+    <p class="note" style="margin-top:10px;">出典：LINEヤフー公式発表／モビルス株式会社「消費者のLINE公式アカウント利用実態調査2025」</p>
+    <div class="secsub">LINE公式アカウントは、こう使われている</div>
+    <ul class="checks">
+      <li>予約受付・来店誘導（飲食店・サロン・クリニックなど）</li>
+      <li>個別相談・カウンセリングの窓口（士業・コンサル・スクール系）</li>
+      <li>商品購入・決済までを完結させる導線（EC・情報商材）</li>
+      <li>会員限定コンテンツの配信（コミュニティ・サブスク）</li>
+    </ul>
+    <p class="note" style="margin-top:10px;">「持っているだけ」では不十分。セグメント配信や行動に応じた出し分けまでできて、初めてこのインフラを使いこなせたと言えます。</p>
   </section>
 
-  <!-- 3 Lステップ -->
+  <!-- 2 大変さの正体 -->
+  <section id="s2">
+    <div class="sec-h"><div class="no">2</div><h2>自分でやるには大変、代行を仕事にするにも大変</h2></div>
+    <p class="body">LINE公式アカウント単体の管理画面はそこまで高機能ではなく、シナリオ配信・セグメント配信・行動分析といった一歩進んだ運用をしようとすると、途端に設計・構築の手間が跳ね上がります。だったら「これを仕事にしてしまえばいいのでは」と考える人もいるでしょう。実際、「Lステップ構築代行」は一つの職能として成立しています。</p>
+    <div class="secsub">構築代行の単価目安（X上の実務者の言及ベース）</div>
+    <table class="cmp">
+      <thead><tr><th>案件の種類</th><th>単価の目安</th></tr></thead>
+      <tbody>
+        <tr><td>シンプル構築</td><td>1.5万〜5万円</td></tr>
+        <tr><td>標準構築（シナリオ・セグメント・LP連携込み）</td><td>5万〜30万円</td></tr>
+        <tr><td>本格構築（複数シナリオ・戦略設計込み）</td><td>30万〜80万円以上</td></tr>
+        <tr><td>月額運用代行・保守</td><td>5万〜30万円／月</td></tr>
+      </tbody>
+    </table>
+    <p class="note">この表はあくまでX上でよく見かける言及の幅であり、公的な調査結果ではありません。実際の相場は地域・業種・実績によって大きく変動します。</p>
+    <p class="body" style="margin-top:12px;">単価が良いのは、それだけ大変な仕事だという裏返しでもあります。しかも単純な設定作業そのものはAIによって急速にコモディティ化が進みつつあり、代行者側の価値の源泉は「設定を代行できるか」から「なぜこの導線で成果が出るのかを設計できるか」へと移りつつあります。</p>
+  </section>
+
+  <!-- 3 2本立て予告 -->
   <section id="s3">
-    <div class="sec-h"><div class="no">3</div><h2>Lステップとは（有料の定番ツール）</h2></div>
-    <div class="cards">
-      <div class="c"><div class="pin">1</div><h3>シナリオ配信</h3><p>友だち追加からの経過日数に応じて自動配信</p><p class="mark">✅ 公式確認済み</p></div>
-      <div class="c accent"><div class="pin">2</div><h3>AIとの連携</h3><p>Webhook経由でChatGPT/Difyと間接連携</p><p class="mark">✅ 公式確認済み</p></div>
-      <div class="c"><div class="pin">3</div><h3>非エンジニア向け</h3><p>GUI操作で完結、代行市場も存在</p><p class="mark">🔶 実務者の相場感</p></div>
+    <div class="sec-h"><div class="no">3</div><h2>だからAIを使う——今回の2本立て</h2></div>
+    <p class="lead">自分でやるにも大変、代行を仕事にするにも大変。だからこそ、AIを使います。Claude Code（チャンネルによってはCodex）を使えば、この構築・運用作業をかなり時短・自動化できます。</p>
+    <div class="cards" style="grid-template-columns:1fr 1fr;margin-top:16px;">
+      <div class="c accent"><div class="pin">①</div><h3>Lステップ×Computer Use</h3><p>国内で最も知名度の高いLINEマーケティングツール「Lステップ」の地道な単純作業を、AIエージェントの「Computer Use」機能で自動化する話</p></div>
+      <div class="c accent"><div class="pin">②</div><h3>LINE Harness導入</h3><p>無料・オープンソースで公開されている新興ツール「LINE Harness」を、実際にどう導入し、どう使うか</p></div>
     </div>
-    <div class="secsub">LステップでAIを使う 導入前 → 導入後</div>
-    <div class="ba">
-      <div class="panel before"><span class="tag">Before</span><ul><li>よくある質問に毎回手動で返信</li><li>担当者不在だと止まる</li><li>専門知識対応は属人化</li></ul></div>
-      <div class="mid">→</div>
-      <div class="panel after"><span class="tag">After</span><ul><li>make＋OpenAI APIで自動応答（30〜90分）</li><li>Dify＋ナレッジベースで専門対応</li><li>Webhookで自動記録・通知も同時に</li></ul></div>
-    </div>
+    <p class="note" style="margin-top:14px;">実際に手を動かして試せるよう、この資料にはプレゼントキットも用意しています（詳細は最後にまとめてお渡しします）。</p>
   </section>
 
-  <!-- 4 LINE Harness -->
+  <!-- 4 Lステップ編 -->
   <section id="s4">
-    <div class="sec-h"><div class="no">4</div><h2>LINE Harnessとは（無料OSS）／Lステップとの違い</h2></div>
-    <div class="secsub">Lステップ vs LINE Harness</div>
-    <table class="cmp"><thead><tr><th>観点</th><th>Lステップ</th><th>LINE Harness</th></tr></thead>
-      <tbody><tr><td>料金</td><td>月額5,000〜32,780円程度🔶</td><td class="yes">実質0円✅</td></tr>
-      <tr><td>API公開</td><td class="no">非公開が基本🔶</td><td class="yes">100以上完全公開✅</td></tr>
-      <tr><td>AIエージェント対応</td><td>Webhook経由で間接連携</td><td class="yes">MCPサーバー標準搭載✅</td></tr>
-      <tr><td>安定性の実績</td><td class="yes">大手SaaSとしての実績🔶</td><td>個人開発OSS・自己責任の比重大🔶</td></tr></tbody></table>
-    <div class="secsub">機能の広がり（LINE Harness）</div>
-    <table class="cmp"><thead><tr><th>観点</th><th>LINE Harness</th><th>備考</th></tr></thead>
-      <tbody><tr><td>セットアップ</td><td class="yes">1コマンド・約5分</td><td>npx create-line-harness✅</td></tr>
-      <tr><td>友だち上限（無料）</td><td class="yes">5,000人まで実質0円</td><td>超過分はCloudflare利用料✅</td></tr>
-      <tr><td>ライセンス</td><td class="yes">MIT</td><td>商用利用・改変・再配布自由✅</td></tr>
-      <tr><td>MCPツール数</td><td class="yes">30種近く</td><td>v0.4.0時点は16ツール🔶</td></tr></tbody></table>
-    <p class="note">※ 価格・仕様は変動しうるため最新情報は各公式サイトで確認</p>
-  </section>
+    <div class="sec-h"><div class="no">4</div><h2>Lステップ編</h2></div>
 
-  <!-- 5 料金・機能 -->
-  <section id="s5">
-    <div class="sec-h"><div class="no">5</div><h2>料金とできること</h2></div>
-    <div class="price">
-      <div class="p"><div class="name">LINE Harness</div><div class="amt">¥0</div><ul><li>友だち5,000人まで実質0円</li><li>超過分はCloudflare利用料のみ</li></ul></div>
-      <div class="p best"><div class="name">Lステップ エントリー</div><div class="amt">¥5,000<small>〜/月🔶</small></div><ul><li>基本のシナリオ配信</li><li>小規模運用向け</li></ul></div>
-      <div class="p"><div class="name">Lステップ プロ</div><div class="amt">¥32,780<small>/月程度🔶</small></div><ul><li>全機能利用</li><li>本格運用向け</li></ul></div>
-    </div>
-    <div class="secsub">LINE Harnessでできること一覧</div>
-    <div class="feat">
-      <div class="f"><div class="ic">①</div><b>ステップ配信</b><span>分単位の遅延制御</span></div><div class="f"><div class="ic">②</div><b>ブロードキャスト</b><span>500人超は自動キュー化</span></div>
-      <div class="f"><div class="ic">③</div><b>リッチメニュー</b><span>動的切り替え</span></div><div class="f"><div class="ic">④</div><b>LIFFフォーム</b><span>アプリ内フォーム</span></div>
-      <div class="f"><div class="ic">⑤</div><b>IF-THEN自動化</b><span>7トリガー×6アクション</span></div><div class="f"><div class="ic">⑥</div><b>Stripe決済</b><span>決済連携</span></div>
-      <div class="f"><div class="ic">⑦</div><b>予約管理</b><span>Googleカレンダー連携</span></div><div class="f"><div class="ic">⑧</div><b>BAN検知</b><span>自動フェイルオーバー</span></div>
-    </div>
-    <p class="note" style="margin-top:10px;">※ Lステップ価格帯は🔶目安。最新価格は必ずLステップ公式サイトで確認</p>
-  </section>
-
-  <!-- 6 使い方 -->
-  <section id="s6">
-    <div class="sec-h"><div class="no">6</div><h2>使い方（初心者基準）</h2></div>
-    <div class="flow">
-      <div class="step"><div class="t">① 道具を揃える</div><div class="d">Cloudflare・LINE公式</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">② 1コマンド</div><div class="d">npx create-line-harness</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">③ AIと接続</div><div class="d">Claude CodeからMCP接続</div></div><div class="arrow">→</div>
-      <div class="step"><div class="t">④ 話しかけて運用</div><div class="d">日常語で指示</div></div>
-    </div>
-    <div class="secsub">こんな悩み → こう頼むだけ</div>
-    <ul class="map">
-      <li><span class="q">「今どれくらい友だちいるか知りたい」</span><span class="ar">→</span><span class="a">「友だち数教えて」</span></li>
-      <li><span class="q">「優良顧客だけに案内したい」</span><span class="ar">→</span><span class="a">「VIPに配信して」</span></li>
-      <li><span class="q">「何から始めれば？」</span><span class="ar">→</span><span class="a">まず無料枠でセットアップしてみる</span></li>
-    </ul>
-    <div class="secsub">すぐ試せるプロンプト</div>
-    <div class="prompt"><span class="cm"># LINE Harness × Claude Code の指示例</span><br><span class="c">&gt;</span> 来週セミナー参加者に3日前と前日にリマインド送って</div>
-    <div class="secsub">実践ステップ</div>
+    <div class="secsub">4-1. Lステップとは何か</div>
+    <p class="body"><span class="hl">Lステップ</span>は、LINE公式アカウントと連携して使うLINEマーケティングオートメーションツールです。「LINE構築＝Lステップ構築」と同義で語られることも珍しくありません。公式・大手企業が運営しているサービスであり、個人が趣味で作った野良ツールではない、という点が安心材料になっています。料金は複数プランがあり、目安として月額5,000円〜32,780円程度（プロプランまで含む）のレンジで語られることが多いですが、価格改定はしばしば行われるため最新の正確な価格は必ず公式サイトで確認してください。</p>
+    <div class="secsub">導入の流れ（3ステップ）</div>
     <ul class="steps">
-      <li><span class="n">1</span>Cloudflare・LINE公式アカウントを用意する</li>
-      <li><span class="n">2</span>`npx create-line-harness` を実行（約5分）</li>
-      <li><span class="n">3</span>Claude CodeからMCPサーバーに接続する</li>
-      <li><span class="n">4</span>日常語で話しかけて運用する</li>
+      <li><span class="n">1</span>申込・プラン選択：Lステップに申し込み、プランを選び、クレジットカードで認証する</li>
+      <li><span class="n">2</span>チャネル情報の連携：LINE DevelopersコンソールでチャネルID・チャネルシークレットを取得し登録する</li>
+      <li><span class="n">3</span>初期設定：友だち追加時の「あいさつメッセージ」など基本の応答を設定する</li>
     </ul>
+    <p class="note" style="margin-top:10px;">シナリオ配信・セグメント配信・行動分析・回答フォームまで、すべてGUI操作だけで完結できるのがLステップ最大の強みです。</p>
+
+    <div class="secsub">4-2. Lステップの「単純作業」という課題</div>
+    <p class="body">高機能なぶん、運用に入る前に大量の"下ごしらえ"が必要になります。</p>
+    <ul class="checks">
+      <li>タグの大量作成：「セミナー参加済み」「商品A購入」など何十個、何百個と用意が必要</li>
+      <li>流入経路の設定：広告・SNS・紹介など、流入元の数だけ個別に作る必要がある</li>
+      <li>メッセージテンプレートの作成：ターゲット・配信タイミングごとに何パターンも用意</li>
+    </ul>
+    <p class="note" style="margin-top:10px;">共通しているのは「管理画面を開いて、フォームに入力して、保存する」を何十回・何百回と繰り返す単純作業だということ。創造性も戦略性もほとんど求められない、疲弊するタイプの仕事です。</p>
+
+    <div class="secsub">4-3. Computer Useで自動化する、という解決策</div>
+    <p class="body">ここで登場するのが、Claude Codeの<span class="hl">「Computer Use」</span>という機能です。画面を見ながらマウス・キーボード操作を自動化する仕組みで、本資料の執筆環境でも実際に使用できることを確認済みです。なお、この機能はClaude Code側のものであり、Codexに同等の機能があるかは未確認です。</p>
+    <div class="prompt"><span class="cm"># タグ作成の自動化を頼む例</span><br><span class="c">&gt;</span> このリストにある20個のタグを、Lステップの管理画面で全部作ってください。<br>タグ名はスプレッドシートのA列を上から順番に使ってください。</div>
+    <div class="prompt" style="margin-top:8px;"><span class="cm"># 流入経路の自動化を頼む例</span><br><span class="c">&gt;</span> このスプレッドシートに書いてある流入経路を、Lステップの「流入経路」設定画面に全部登録してください。</div>
+    <p class="body" style="margin-top:12px;">Computer Useの活用先は単純作業の自動化だけではありません。note「Lステップ連携ラボ」（note.com/glad_walrus6151）では、Lステップの<span class="hl-a">Webhook</span>機能を使ったAIチャットボット構築の実例が紹介されています。Webhookは「LINEで何かが起きたら、自動で別の場所に知らせる仕組み」のことで、そこから先の返答をChatGPTやDifyといった外部AIツールが担当します。</p>
+    <div class="ba" style="margin-top:14px;">
+      <div class="panel before"><span class="tag">シンプル型</span><ul><li>make（ノーコード自動化）＋ OpenAI APIの1問1答ボット</li><li>料理レシピ提案などが実装例</li><li>実装時間の目安は30〜90分程度</li></ul></div>
+      <div class="mid">→</div>
+      <div class="panel after"><span class="tag">専門特化型</span><ul><li>make ＋ Dify ＋ ナレッジベース</li><li>データベース連携で専門性の高い回答が可能</li><li>就活支援・決済連携ガイド等の実例も</li></ul></div>
+    </div>
+    <p class="note" style="margin-top:10px;">就活支援AIチャットボットや決済連携ガイドの実例記事はタイトルからの推定であり、本文までは読み込めていない点にはご留意ください。</p>
+
+    <div class="secsub">4-4. 難易度が高い連携のステップバイステップ</div>
+    <p class="body">紹介した事例の中で、特に難易度が高いのが「make ＋ Dify ＋ ナレッジベース」の専門知識対応型ボットです。組み立て方をステップバイステップで整理します。</p>
+    <ul class="steps">
+      <li><span class="n">1</span>Webhookを受け取る土台を作る：makeでLステップからのWebhookを受信するシナリオを作成</li>
+      <li><span class="n">2</span>Difyにナレッジベースを用意する：業種特有のFAQやマニュアルをテキスト化してアップロード</li>
+      <li><span class="n">3</span>Difyのアプリを組む：ナレッジベースを参照する質問応答アプリを構築</li>
+      <li><span class="n">4</span>makeでLステップとDifyをつなぐ：受信メッセージをDifyのAPIに渡し、回答をLINEに返信するフローを組む</li>
+      <li><span class="n">5</span>小さくテストする：社内・テストアカウントで精度を確認してから本番公開する</li>
+    </ul>
+    <p class="note" style="margin-top:10px;">この設定作業自体もComputer Useやコーディングエージェントの支援を受けながら進められます。シンプル型より設定難易度は上がりますが、それに見合う専門性の高い回答が実現できる構成です。</p>
+
+    <div class="secsub">4-5. Lステップの2つのデメリット</div>
+    <div class="cards" style="grid-template-columns:1fr 1fr;">
+      <div class="c"><div class="pin">1</div><h3>柔軟性が低い</h3><p>公式のクローズドなツールゆえ、機能追加は運営会社の開発スケジュール依存。業種に合わせた自由なカスタマイズは基本的にできない</p></div>
+      <div class="c"><div class="pin">2</div><h3>価格が高い</h3><p>月額5,000円〜32,780円程度に加え、オプション機能で追加費用も。2025年12月追加のAPI連携機能は月額11,000円程度＋Webhook併用で5,500円程度が別途必要</p></div>
+    </div>
+    <p class="note" style="margin-top:12px;">「安全・安心だけど、自由が利かなくて、お金もかかる」——このLステップの弱点を正面から解消しようとしているのが、次に紹介するオープンソースツール「LINE Harness」です。</p>
   </section>
 
-  <!-- 7 事例・活用例 -->
-  <section id="s7">
-    <div class="sec-h"><div class="no">7</div><h2>ユースケースと活用例</h2></div>
+  <!-- 5 LINE Harness編 -->
+  <section id="s5">
+    <div class="sec-h"><div class="no">5</div><h2>LINE Harness編</h2></div>
+
+    <div class="secsub">5-1. LINE Harnessとは何か</div>
+    <p class="body"><span class="hl">LINE Harness</span>は、LINE公式アカウント運用のための完全オープンソースCRMです。「The Harness」というプロジェクトシリーズの第一弾として公開され、第二弾「X Harness」、第三弾「IG Harness」もすでに公開済み。最新のGitHubリポジトリでは「次はどの業界を0円にしようかな」という第四弾の予告まで確認できます。開発者は野田修一氏（X: @ai_shunoda、GitHub: @Shudesu）。既存のLINE拡張ツールに1アカウントあたり月5万円、年間数百万円単位を支払っていた原体験が、自作＋オープンソース公開という発想につながったようです。</p>
+    <p class="body">「ハーネス」という名前の由来も興味深く、犬用ハーネスのように「AIが暴走しないための外枠」という意味が込められています。中身のAIモデル（現在はClaude Code）は入れ替わっても、ハーネスという枠組み自体は存続し続けるという設計思想です。</p>
+
+    <div class="secsub">GitHubリポジトリの実データ（2026年7月5日時点で確認）</div>
+    <div class="stats">
+      <div class="stat"><div class="n">515</div><div class="u">スター</div></div>
+      <div class="stat"><div class="n">301</div><div class="u">フォーク</div></div>
+      <div class="stat"><div class="n">175</div><div class="u">コミット</div></div>
+      <div class="stat"><div class="n">17<small>件</small></div><div class="u">リリース（最新v0.15.0）</div></div>
+      <div class="stat"><div class="n">15</div><div class="u">Issue</div></div>
+      <div class="stat"><div class="n">12</div><div class="u">PR</div></div>
+    </div>
+    <p class="note" style="margin-top:10px;">READMEは日本語・英語・スペイン語・韓国語・中国語の5言語に対応。`AGENTS.md`も同梱され、機能追加が続く開発ペースの速さは個人開発OSSとしては驚くべき水準です。</p>
+
+    <div class="secsub">公式サイトの雰囲気</div>
+    <div class="lh-site" style="background:linear-gradient(160deg,#0a1410,#132018 60%,#0d1a14);color:#c9f5d9;">
+      <div class="copy" style="color:#4ade80;">L社やU社の上位互換を、なぜ無料で公開するのか。</div>
+      <div class="zero" style="color:#4ade80;">0円</div>
+      <div class="sub">shudesu.github.io/line-harness-oss/ — 黒〜濃緑グラデーション背景に、ミントグリーンのロゴと「0円」の大きな数字。既存の有料ツールを名指しで意識した、かなり強気なメッセージです。</div>
+    </div>
+    <p class="note" style="margin-top:10px;">ページ下部には開発者プロフィールカードもあり、野田修一氏本人が「LINE Harness開発者 / AI Engineer」としてプロフィールを掲載する形で紹介されています。</p>
+
+    <div class="secsub">「LINE Harnessは、始まりに過ぎません。」</div>
     <div class="cards">
-      <div class="c"><div class="pin">💬</div><h3>問い合わせ対応</h3><p>make＋AIでWebhook自動応答。実装30〜90分✅</p></div>
-      <div class="c accent"><div class="pin">🎓</div><h3>CS（顧客対応）活用</h3><p>受講履歴と紐づくAIチャット応答＋カレンダー予約→録画→AI検索。構築目安1日✅</p></div>
-      <div class="c"><div class="pin">📋</div><h3>申込〜フォロー</h3><p>フォーム作成→タグ付け→シナリオ開始を自動化</p></div>
+      <div class="c accent"><div class="pin">1</div><h3>LINE Harness</h3><p>公開中</p></div>
+      <div class="c accent"><div class="pin">2</div><h3>X Harness</h3><p>公開中</p></div>
+      <div class="c accent"><div class="pin">3</div><h3>IG Harness</h3><p>公開中</p></div>
+      <div class="c"><div class="pin">4</div><h3>???Harness</h3><p>次弾予告</p></div>
     </div>
-    <div class="secsub">活用までの流れ（LINE Harness）</div>
-    <div class="cycle">
-      <div class="node"><b>① 話しかける</b><span>自然言語で依頼</span></div><span class="ar">→</span>
-      <div class="node"><b>② AIが実行</b><span>MCP経由で操作</span></div><span class="ar">→</span>
-      <div class="node"><b>③ 結果を確認</b><span>友だち数・クリック数等</span></div><span class="ar">↻</span>
-      <div class="node"><b>④ 次の一手</b><span>改善提案・再依頼</span></div>
+    <p class="note" style="margin-top:10px;">LINEだけでなく、SNS運用全体をオープンソース＋AIエージェントで置き換えていく——そんな野心的な構想がうかがえます。</p>
+
+    <div class="secsub">開発者本人のXポスト（2026年3月26日16:11）</div>
+    <div class="xcard">
+      <div class="xhead">
+        <div class="xavatar">野</div>
+        <div>
+          <div class="xname">野田修一 | The Harnessで0円</div>
+          <div class="xhandle">@ai_shunoda</div>
+          <div class="xtime">2026年3月26日 16:11</div>
+        </div>
+      </div>
+      <div class="xbody">LINE Harness v0.4.0 — MCPサーバー対応🎉 Claude CodeからLINE公式アカウントを完全操作できるようになった。「友だち数教えて」「VIPに配信して」「クリック数見せて」─全部自然言語でいける。16ツール、管理画面いらず。
+- URL自動追跡（送信リンクを自動トラッキング化、誰が押したか特定）
+- テキスト→Flex自動変換（URLをボタン化）
+- LIFF連携クリック計測（LINEアプリ→ユーザー特定、PC→ログイン不要）
+- MCPサーバーソースOSS公開</div>
+      <div class="xstats"><span><b>1.4万</b> 表示</span><span><b>3</b> 返信</span><span><b>20</b> リポスト</span><span><b>143</b> いいね</span><span><b>128</b> ブックマーク</span></div>
     </div>
-    <p class="note" style="margin-top:10px;">⚠️ 工数削減・成果率等の数字は一次記事未読の参考情報。断定的な引用は避ける。CS活用例の構築目安1日は「クロードコードの扱いに熟知したエンジニア経験者」が前提🔶</p>
-    <div class="secsub">もう一歩進んだ使い方</div>
-    <ul class="checks"><li>MCPという共通規格で、Claude Code以外のクライアントとも接続可能</li><li>100以上のREST API・公式SDKで自社システムと直接連携</li><li>姉妹プロジェクト「X Harness」「IG Harness」でSNS運用を横断管理</li></ul>
+    <p class="body" style="margin-top:12px;">管理画面を開いてクリックし続ける代わりに、チャットで「友だち数教えて」と話しかけるだけで完結する——これがLINE Harnessの最大の武器です。料金は完全無料。Cloudflare Workers上で動作し、友だち5,000人までは実質0円で運用でき、超過分もLINE Harness自体への課金ではなくCloudflareへの実費です。</p>
+
+    <div class="secsub">5-2. 導入方法をステップバイステップで</div>
+    <p class="body">開発者本人による実演動画で確認できた手順です。事前準備を含めても目安は<span class="hl">20分程度</span>。</p>
+    <div class="secsub" style="font-size:14px;margin-top:14px;">事前準備（目安20分・すべて無料）</div>
+    <ul class="steps">
+      <li><span class="n">1</span>Cloudflareアカウントを作り、R2オブジェクトストレージを有効化する（請求は0円、10GBまでは無料枠）</li>
+      <li><span class="n">2</span>LINE公式アカウントを作り、応答設定でメッセージAPI設定を開き、チャネルID・チャネルシークレットを取得する</li>
+      <li><span class="n">3</span>LINE開発者アカウントでLINEログインチャンネルを作成する（下記2つの落とし穴に注意）</li>
+    </ul>
+    <div class="box" style="margin-top:12px;">
+      <h3>ここでハマりやすい2つの落とし穴</h3>
+      <ul>
+        <li>作成したチャンネルは必ず「公開」状態にすること。「開発中」のままだと動作しません</li>
+        <li>LIFFアプリのスコープは3つ全部チェックすること。開発者本人も「プロフィール」のチェックを入れ忘れて後からバグに気づいた実例を明かしています。さらに、LINEログインチャンネルの「友だち追加オプション」でLINE公式アカウントをリンクするのを忘れないこと——これを忘れると友だち登録自体が機能しません</li>
+      </ul>
+    </div>
+    <div class="secsub" style="font-size:14px;margin-top:16px;">インストール</div>
+    <p class="body">事前準備で控えた4つの値（チャネルID・チャネルシークレット・チャネルアクセストークン・LIFF ID）を用意したら、ターミナルで次の1コマンドを実行します。</p>
+    <div class="prompt"><span class="cm"># プロジェクト名は英数字のみ。複数アカウント運用時は別名に</span><br>npx create-line-harness@latest &lt;プロジェクト名&gt;</div>
+    <p class="note" style="margin-top:10px;">コマンド実行後、控えた4つの値を順番に入力。途中でMCPサーバー設定を聞かれた場合は「Yes」と答えることを推奨します。</p>
+    <div class="secsub" style="font-size:14px;margin-top:16px;">最終仕上げ</div>
+    <ul class="checks">
+      <li>LINEの応答設定に戻り、Webhook URLを貼り付けて「Webhookの利用」をONにする</li>
+      <li>LIFFのエンドポイントURLを実際のURLに差し替える（末尾に余分な空白が入りやすいので要注意）</li>
+      <li>友だち追加URL（QRコード）を取得する</li>
+      <li>管理画面にログインできることを確認する</li>
+      <li>「友だち追加時」に発火するシナリオ（挨拶メッセージ）を手動で作成する</li>
+    </ul>
+    <p class="note" style="margin-top:10px;">この基本セットアップ・一般的な運用にClaude Codeは一切使われていません。ここまではCloudflare・ターミナル・LINEの管理画面だけで完結します。Claude Codeが本領を発揮するのは、フォーム作成やシナリオの自動生成など、もう一段進んだカスタマイズをする時です。</p>
+
+    <div class="secsub">5-3. 実際にできること</div>
+    <p class="body">MCPサーバー経由でClaude Codeから自然言語操作ができる範囲は非常に広範です。本資料の執筆環境でも実際にLINE HarnessのMCPサーバーに接続して確認したところ、次のような<span class="hl">30種近いツール</span>が利用可能でした。</p>
+    <div class="feat">
+      <div class="f"><b>シナリオ管理</b></div><div class="f"><b>友だち管理</b></div><div class="f"><b>タグ管理</b></div><div class="f"><b>リッチメニュー作成</b></div>
+      <div class="f"><b>配信（ブロードキャスト）</b></div><div class="f"><b>フォーム作成</b></div><div class="f"><b>広告連携（Meta/X/Google/TikTok）</b></div><div class="f"><b>トラッキングリンク作成</b></div>
+      <div class="f"><b>トラフィックプール管理</b></div><div class="f"><b>スタッフ管理</b></div>
+    </div>
+    <p class="note" style="margin-top:10px;">これだけの機能を「友だち数教えて」「VIPに配信して」「クリック数見せて」といった日常語の指示だけで動かせます。</p>
+    <div class="secsub">CS活用事例</div>
+    <p class="body">AIコンサル業を営むれん氏（aivest-channel）が対談で語った事例では、受講生がLINEで質問すると受講履歴・過去のレッスン内容と紐づいた回答が返ってきます。さらにGoogleカレンダー連携と組み合わせ、次のワークフローが実現できています。</p>
+    <div class="flow">
+      <div class="step"><div class="t">面談予約</div></div><div class="arrow">→</div>
+      <div class="step"><div class="t">Google Meetで面談</div></div><div class="arrow">→</div>
+      <div class="step"><div class="t">録画・テキスト化</div></div><div class="arrow">→</div>
+      <div class="step"><div class="t">タスク抽出</div></div><div class="arrow">→</div>
+      <div class="step"><div class="t">AIチャットで即答</div></div>
+    </div>
+    <p class="note" style="margin-top:10px;">構築にかかった期間は待機時間も含めて「大体1日」。ただし本人は「Claude Codeの扱い方に熟知したエンジニア経験者だからこそ早く構築できた」と明言しており、非エンジニアが同レベルを1日で行うのは前提知識のハードルがある点に注意が必要です。</p>
+
+    <div class="secsub">バランスを取るための、率直な意見も</div>
+    <p class="body">Lステップ構築を専門にしている代理店側の視点も紹介します。以下はあくまで発言者個人の見解であり、発言者はLステップ構築を生業とする代理店側の当事者であるため、無料の競合サービスには厳しめの評価になりやすい立場にある点も踏まえて読んでください。</p>
+    <ul class="checks">
+      <li>LINE Harnessは1人のエンジニアが個人開発しているOSSであり、大手が運営する既存サービスに比べ安定性の実績はまだ少ないという指摘。Cloudflareが数ヶ月に1回程度落ちることがあり、そのタイミングで配信が止まるリスクも指摘されている</li>
+      <li>Claude CodeのSkillsやプロンプトの雛形ファイルに業務ノウハウが集約されるため、環境が万一侵害されると情報がまとめて流出するリスクがあるという指摘</li>
+      <li>「クライアントワークで他社に勧めるのは（セキュリティ面で）避けたい、自社利用なら自己責任で」という立場の意見もある</li>
+    </ul>
+    <p class="note" style="margin-top:10px;">数字や機能だけを見るとLINE Harnessが有利に見えますが、実際には「どちらが優れているか」ではなく「自分の状況にどちらが合っているか」で考えるべきでしょう。非エンジニアで手厚いサポートを重視するならLステップ、コストを抑えたい・技術力があり自由度を求めるならLINE Harness、というのが大まかな目安です。</p>
   </section>
 
-  <!-- 8 FAQ・注意 -->
-  <section id="s8">
-    <div class="sec-h"><div class="no">8</div><h2>FAQ・注意点</h2></div>
-    <div class="faq">
-      <div class="qa"><div class="q">LINE Harnessは非エンジニアでも使えますか？</div><div class="a">技術的セットアップの比重が高く「技術力のある事業者向け」という指摘があります🔶</div></div>
-      <div class="qa"><div class="q">5,000人を超えたら課金されますか？</div><div class="a">Cloudflareの利用料が発生しますが、LINE Harness自体への課金ではありません✅</div></div>
-      <div class="qa"><div class="q">Lステップから乗り換えるべきですか？</div><div class="a">状況次第。すでに運用中なら無理な乗り換えは不要です（断定はできません）</div></div>
+  <!-- 6 まとめ＋プレゼント -->
+  <section id="s6">
+    <div class="sec-h"><div class="no">6</div><h2>まとめ——実際に導入するときは、このプレゼントを使ってください</h2></div>
+    <div class="ba">
+      <div class="panel before"><span class="tag">Lステップ</span><ul><li>公式・大手企業運営の安全・安心の定番</li><li>単純作業はComputer Useで自動化できる</li><li>柔軟性の低さと価格の高さがデメリット</li></ul></div>
+      <div class="mid">×</div>
+      <div class="panel after"><span class="tag">LINE Harness</span><ul><li>そのデメリットを解消するOSSの選択肢</li><li>完全無料・MCPサーバー標準搭載</li><li>技術的セットアップと自己責任の比重が高い</li></ul></div>
     </div>
-    <div class="secsub">これからの流れ</div>
-    <div class="timeline">
-      <div class="row"><span class="tbadge">今</span><div><b>状況を整理する</b><p>すでにLステップ運用中か、新規かで選択肢が変わる</p></div></div>
-      <div class="row"><span class="tbadge">まず試す</span><div><b>無料枠から</b><p>LINE HarnessまたはLステップのWebhook連携</p></div></div>
-      <div class="row"><span class="tbadge">その先</span><div><b>自然言語運用へ</b><p>AIエージェントに任せる範囲を広げる</p></div></div>
+    <p class="body" style="margin-top:14px;">どちらか一方が絶対的な正解ではありません。すでにLステップで運用中なら無理に乗り換える必要はなく、Computer UseやWebhook連携でのAI活用から試すのが現実的です。これから新しく始める、コストをかけずに試したいなら、LINE Harnessの無料枠から触ってみるという選択肢が増えたことになります。</p>
+
+    <div class="box" style="margin-top:18px;">
+      <h3>🎁 プレゼントキットがあります</h3>
+      <ul>
+        <li>LINE Harness セットアップ完全チェックリスト（事前準備〜Webhook接続完了・ハマりポイント込み）</li>
+        <li>Lステップ タグ作成自動化Skill（Claude Code用）</li>
+        <li>LINE Harness運用Skills集（Claude Code用）</li>
+        <li>LINE運用プロンプトまとめ（両環境で使えるコピペ用）</li>
+      </ul>
     </div>
-    <div class="secsub">読むときの注意（確度）</div>
-    <div class="box"><h3>⚠️ この資料の読み方</h3>
-      <ul><li>✅公式確認済み ／ 🔶一次情報あり（相場感・二次情報含む） ／ ⚠️未確認・推測</li>
-      <li>構築代行の市場規模・成果事例数値は未確認・参考情報にとどめています（誇張・断定保証は禁止）</li>
-      <li>批判的視点（安定性・セキュリティリスク等）は発言者個人の見解であり、公式見解ではありません</li>
-      <li>価格・仕様は変わるため、最終確認は各公式サイトで</li></ul></div>
+    <p class="note" style="margin-top:10px;">受け取り方：<a href="./present.html" class="hl-a">present.html</a> を開き、各キットの「📋 コピー」または「⬇ ダウンロード」ボタンで受け取れます。GitHubで見ている場合は `kit/` フォルダの各ファイルからも同じ内容を受け取れます。</p>
+    <p class="note" style="margin-top:10px;">より詳しい図解は <a href="./slides.html" class="hl-a">スライド資料</a> もあわせてご覧ください。</p>
   </section>
 
   <footer>
@@ -328,9 +429,9 @@
       <div class="lg"><img src="data:image/jpeg;base64,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" alt="ClaudeCodeチャンネル"><b>ClaudeCodeチャンネル<small>Claude Code を学ぶ</small></b></div>
       <a class="cta" href="https://www.youtube.com/channel/UCIAk415K5Z3GvKfwMbb5GWA">&lt;/&gt; チャンネル登録</a>
     </div>
-    <p class="src">🎁 詳しくはプレゼントキットで — <a href="./present.html">present.html</a> からセットアップチェックリスト・Skill・プロンプト集をコピペ/ダウンロードで受け取れます<br>
-      出典：LINE Harness公式GitHub <a href="https://github.com/Shudesu/line-harness-oss">github.com/Shudesu/line-harness-oss</a> ／ note「Lステップ連携ラボ」<a href="https://note.com/glad_walrus6151">note.com/glad_walrus6151</a><br>
-      ※ 本資料は非公式まとめ。全文（出典つき）・スライドは概要欄から。</p>
+    <p class="src">🎁 実際に導入するときは、プレゼントキットも使ってください — <a href="./present.html">present.html</a> からセットアップチェックリスト・Skill・プロンプト集をコピペ／ダウンロードで受け取れます<br>
+      参照：Lステップ公式ブログ ／ LINE Harness公式 <a href="https://shudesu.github.io/line-harness-oss/">shudesu.github.io/line-harness-oss</a>（GitHub: <a href="https://github.com/Shudesu/line-harness-oss">github.com/Shudesu/line-harness-oss</a>） ／ note「Lステップ連携ラボ」<a href="https://note.com/glad_walrus6151">note.com/glad_walrus6151</a><br>
+      ※ 本資料は非公式まとめ。仕様・価格は変わる可能性があるため、導入前には各公式サイトで最新情報をご確認ください。全文（出典つき）は <a href="./README.md">README.md</a>、より詳しい図解は <a href="./slides.html">スライド資料</a> から。</p>
   </footer>
 </div>
 </body>
